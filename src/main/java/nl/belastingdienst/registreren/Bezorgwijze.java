@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
 @Data
 @Entity
 public class Bezorgwijze {
@@ -13,5 +12,8 @@ public class Bezorgwijze {
     private int id;
 
     private String naam;
+
+//    @ManyToMany(mappedBy = "bezorgwijzes")
+//    private List<Gebruiker> gebruikers = new ArrayList<>();
 
 }

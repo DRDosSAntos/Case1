@@ -1,5 +1,7 @@
 package nl.belastingdienst.registreren;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GebruikerToevoegen implements Boundary {
@@ -39,10 +41,21 @@ public class GebruikerToevoegen implements Boundary {
     private void add() {
 
         String naam = prompt("Naam: ");
+
         String emailAdres = prompt("e-Mailadres: ");
+        int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u (1=Afhalen, 2=.., ...): ");
+
         Gebruiker g = new Gebruiker();
         g.setName(naam);
         g.setEmailAddress(emailAdres);
+
+        Bezorgwijze b = new Bezorgwijze();
+        b.setId(bezorgwijzeId);
+
+        List<Bezorgwijze> bezorgwijzes = new ArrayList<>();
+        bezorgwijzes.add(b);
+
+        g.setBezorgwijzes(bezorgwijzes);
 
         GebruikerDAO dao1 = new GebruikerDAO();
         dao1.persist(g);
@@ -55,6 +68,12 @@ public class GebruikerToevoegen implements Boundary {
         System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public static int prompt2(String message) {
+        System.out.print(message);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
 }
