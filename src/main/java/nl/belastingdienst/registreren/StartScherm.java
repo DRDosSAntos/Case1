@@ -2,7 +2,7 @@ package nl.belastingdienst.registreren;
 
 import java.util.Scanner;
 
-import static nl.belastingdienst.registreren.GebruikerToevoegen.registrerenGebruiker;
+import static nl.belastingdienst.registreren.Registratie.registrerenGebruiker;
 
 public class StartScherm implements Boundary {
 

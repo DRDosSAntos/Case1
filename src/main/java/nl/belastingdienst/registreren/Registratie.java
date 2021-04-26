@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GebruikerToevoegen implements Boundary {
+public class Registratie implements Boundary {
 
-    private static GebruikerToevoegen self;
+    private static Registratie self;
 
-    private GebruikerToevoegen() {
+    private Registratie() {
     }
 
-    public static synchronized GebruikerToevoegen registrerenGebruiker() {
-        if (self == null) self = new GebruikerToevoegen();
+    public static synchronized Registratie registrerenGebruiker() {
+        if (self == null) self = new Registratie();
         return self;
     }
 
