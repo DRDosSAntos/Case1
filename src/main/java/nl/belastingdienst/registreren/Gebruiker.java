@@ -19,8 +19,9 @@ public class Gebruiker {
     private long userID;
 
     private String name;
+    private String emailAddress;
     private String address;
-    private int age;
+
 
 }
 
