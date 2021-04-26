@@ -3,16 +3,15 @@ package nl.belastingdienst.registreren;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import static nl.belastingdienst.registreren.RegistratieApp.em;
+
 public class GebruikerDAO {
-    public static final EntityManager em =
-            Persistence.createEntityManagerFactory("MySQL-case1").createEntityManager();
 
     public void persist(Gebruiker g) {
         em.getTransaction().begin();
         em.persist(g);
         em.getTransaction().commit();
     }
-
 
     public Gebruiker findUserId(long userID) {
         return em.find(Gebruiker.class, userID);
