@@ -1,12 +1,8 @@
 package nl.belastingdienst.registreren;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Registratie implements Boundary {
-
-    private String[] bezorgwijzes = {"Afhalen", "Verzenden", "Magazijn", "Rembours"};
 
     private static Registratie self;
 
@@ -19,21 +15,20 @@ public class Registratie implements Boundary {
     }
 
     public void start() {
-        while (true) {
-            System.out.println("(1) [Registratiegegevens invullen]");
-            System.out.println("(x) [Terug]");
 
-            switch (readLine()) {
-                case "1":
-                    add();
-                    break;
-                case "x":
-                    return;
-                default:
-                    System.out.println("Ongeldige keuze; probeer opnieuw.");
-            }
+        System.out.println("(1) [Registratiegegevens invullen]");
+        System.out.println("(x) [Terug]");
+
+        switch (readLine()) {
+            case "1":
+                add();
+                break;
+            case "x":
+                return;
+            default:
+                System.out.println("Ongeldige keuze; probeer opnieuw.");
+
         }
-
     }
 
     private String readLine() {
@@ -46,50 +41,57 @@ public class Registratie implements Boundary {
 
         String naam = prompt("Naam: ");
         String emailAdres = prompt("e-Mailadres: ");
-        int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u: " +
-                "\n1= Afhalen " +
-                "\n2=Verzenden" +
-                "\n3=Magazijn" +
-                "\n4=Rembours");
-        if (bezorgwijzeId == 1) {
+        Set<Integer> bezorgwijzeIds = new HashSet<>();
+
+        while (true) {
+            try {
+                int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u: " +
+                        "\n1= Afhalen " +
+                        "\n2=Verzenden" +
+                        "\n3=Magazijn" +
+                        "\n4=Rembours" +
+                        "\n0=Stoppen");
+
+                if (bezorgwijzeId == 0) {
+                    break;
+                } else if(!(bezorgwijzeId>=0 && bezorgwijzeId <= 4)){
+                    System.out.println("Ongeldige keuze, kies opties 0 t/m 4!");
+                } else {
+                    bezorgwijzeIds.add(bezorgwijzeId);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Dit is ongeldige invoer. Probeer het opnieuw.");
+            }
+        }
+
+        if (bezorgwijzeIds.contains(1)) {
             System.out.println("U heeft gekozen voor 'Afhalen', vul aub ook uw huisadres in.");
             String adres = prompt("Huisadres: ");
-            g.setAddress(adres);
-            naamZetten(g, naam, emailAdres, bezorgwijzeId);
-        } else {
-
-            naamZetten(g, naam, emailAdres, bezorgwijzeId);
+            g.setAdres(adres);
         }
+
+        registratieGegevensSetten(g, naam, emailAdres, bezorgwijzeIds);
     }
 
-    private void naamZetten(Gebruiker g, String naam, String emailAdres, int bezorgwijzeId) {
-        g.setName(naam);
-        g.setEmailAddress(emailAdres);
-        g.setGekozenBezorgwijze(bezorgwijzes[bezorgwijzeId - 1]);
+    private void registratieGegevensSetten(Gebruiker g, String naam, String emailAdres, Set<Integer> bezorgwijzeIds) {
+        g.setNaam(naam);
+        g.setEmailadres(emailAdres);
+        g.setWachtwoord("Welkom123");
 
 
-        Bezorgwijze b = new Bezorgwijze();
-        b.setId(bezorgwijzeId);
-
-        List<Bezorgwijze> bezorgwijzes = new ArrayList<>();
-        bezorgwijzes.add(b);
-
-        g.setBezorgwijzes(bezorgwijzes);
+        for (Integer bezorgwijzeId : bezorgwijzeIds) {
+            Bezorgwijze b = new Bezorgwijze();
+            b.setId(bezorgwijzeId);
+            g.addBezorgwijze(b);
+        }
 
         GebruikerDAO dao1 = new GebruikerDAO();
         dao1.persist(g);
 
-        System.out.println("Gebruiker geregistreerd!");
+        System.out.println("\nGEBRUIKER GEREGISTREERD!!");
+        System.out.println("Uw wachtwoord is: " + g.getWachtwoord());
     }
 
-
-    private void add2() {
-        int bezorgwijzeId2 = prompt2("Welke bezorgwijze(n) kiest u: " +
-                "\n1= Afhalen " +
-                "\n2=Verzenden" +
-                "\n3=Magazijn" +
-                "\n4=Rembours");
-    }
 
     public static String prompt(String message) {
         System.out.print(message);
@@ -102,5 +104,4 @@ public class Registratie implements Boundary {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
-
 }

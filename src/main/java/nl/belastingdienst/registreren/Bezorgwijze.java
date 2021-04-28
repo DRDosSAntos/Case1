@@ -18,5 +18,4 @@ public class Bezorgwijze {
 
     @ManyToMany(mappedBy = "bezorgwijzes")
     private List<Gebruiker> gebruikers = new ArrayList<>();
-
 }

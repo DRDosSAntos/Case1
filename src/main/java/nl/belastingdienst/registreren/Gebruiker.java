@@ -16,16 +16,20 @@ import java.util.List;
 @Entity
 
 public class Gebruiker {
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue
     private long userID;
 
-    private String name;
-    private String emailAddress;
-    private String address;
-    private String gekozenBezorgwijze;
+    private String naam;
+    private String emailadres;
+    private String adres;
+    private String wachtwoord;
 
     @ManyToMany
     private List<Bezorgwijze> bezorgwijzes = new ArrayList<>();
+
+    public void addBezorgwijze(Bezorgwijze b){
+        this.bezorgwijzes.add(b);
+    }
 
 }
 
