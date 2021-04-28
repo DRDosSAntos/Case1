@@ -7,7 +7,7 @@ import static nl.belastingdienst.registreren.Registratie.registrerenGebruiker;
 public class StartScherm implements Boundary {
 
     public void start() {
-        while (true) {
+
             System.out.println("----------------------------------------------");
             System.out.println("Welkom bij het startscherm!");
             System.out.println("Wat wilt u doen?");
@@ -39,8 +39,6 @@ public class StartScherm implements Boundary {
                 System.out.println("Tot ziens.");
             }
         }
-
-    }
 
     private String readLine() {
         Scanner scanner = new Scanner(System.in);
