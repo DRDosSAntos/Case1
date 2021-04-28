@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,7 +16,7 @@ public class Bezorgwijze {
 
     private String naam;
 
-//    @ManyToMany(mappedBy = "bezorgwijzes")
-//    private List<Gebruiker> gebruikers = new ArrayList<>();
+    @ManyToMany(mappedBy = "bezorgwijzes")
+    private List<Gebruiker> gebruikers = new ArrayList<>();
 
 }

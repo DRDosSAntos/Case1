@@ -22,6 +22,7 @@ public class Gebruiker {
     private String name;
     private String emailAddress;
     private String address;
+    private String gekozenBezorgwijze;
 
     @ManyToMany
     private List<Bezorgwijze> bezorgwijzes = new ArrayList<>();

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Registratie implements Boundary {
 
+    private String[] bezorgwijzes = {"Afhalen", "Verzenden", "Magazijn", "Rembours"};
+
     private static Registratie self;
 
     private Registratie() {
@@ -18,7 +20,7 @@ public class Registratie implements Boundary {
 
     public void start() {
         while (true) {
-            System.out.println("(1) [Naam doorgeven]");
+            System.out.println("(1) [Registratiegegevens invullen]");
             System.out.println("(x) [Terug]");
 
             switch (readLine()) {
@@ -31,6 +33,7 @@ public class Registratie implements Boundary {
                     System.out.println("Ongeldige keuze; probeer opnieuw.");
             }
         }
+
     }
 
     private String readLine() {
@@ -39,15 +42,31 @@ public class Registratie implements Boundary {
     }
 
     private void add() {
+        Gebruiker g = new Gebruiker();
 
         String naam = prompt("Naam: ");
-
         String emailAdres = prompt("e-Mailadres: ");
-        int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u (1=Afhalen, 2=.., ...): ");
+        int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u: " +
+                "\n1= Afhalen " +
+                "\n2=Verzenden" +
+                "\n3=Magazijn" +
+                "\n4=Rembours");
+        if (bezorgwijzeId == 1) {
+            System.out.println("U heeft gekozen voor 'Afhalen', vul aub ook uw huisadres in.");
+            String adres = prompt("Huisadres: ");
+            g.setAddress(adres);
+            naamZetten(g, naam, emailAdres, bezorgwijzeId);
+        } else {
 
-        Gebruiker g = new Gebruiker();
+            naamZetten(g, naam, emailAdres, bezorgwijzeId);
+        }
+    }
+
+    private void naamZetten(Gebruiker g, String naam, String emailAdres, int bezorgwijzeId) {
         g.setName(naam);
         g.setEmailAddress(emailAdres);
+        g.setGekozenBezorgwijze(bezorgwijzes[bezorgwijzeId - 1]);
+
 
         Bezorgwijze b = new Bezorgwijze();
         b.setId(bezorgwijzeId);
@@ -60,8 +79,16 @@ public class Registratie implements Boundary {
         GebruikerDAO dao1 = new GebruikerDAO();
         dao1.persist(g);
 
-
         System.out.println("Gebruiker geregistreerd!");
+    }
+
+
+    private void add2() {
+        int bezorgwijzeId2 = prompt2("Welke bezorgwijze(n) kiest u: " +
+                "\n1= Afhalen " +
+                "\n2=Verzenden" +
+                "\n3=Magazijn" +
+                "\n4=Rembours");
     }
 
     public static String prompt(String message) {

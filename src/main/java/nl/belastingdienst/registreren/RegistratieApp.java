@@ -13,7 +13,6 @@ public class RegistratieApp {
         BezorgwijzeDAO bezorgwijzeDAO = new BezorgwijzeDAO();
         bezorgwijzeDAO.initData();
 
-
         new StartScherm().start();
     }
 }
