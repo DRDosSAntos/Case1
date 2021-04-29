@@ -18,9 +18,8 @@ public class StartScherm implements Boundary {
             System.out.println("(2) [Inloggen] ");
             System.out.println("(x) [Afsluiten] ");
 
-
             try {
-                switch (readLine()) {
+                switch (new Util().readLine()) {
                     case "1":
                         registrerenGebruiker().start();
                         break;
@@ -47,11 +46,6 @@ public class StartScherm implements Boundary {
                 System.out.println("Tot ziens.");
             }
         }
-    }
-
-    private String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 }
 

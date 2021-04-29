@@ -1,15 +1,11 @@
 package nl.belastingdienst.registreren;
 
-import org.w3c.dom.ls.LSOutput;
-
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static nl.belastingdienst.registreren.Registratie.prompt;
 import static nl.belastingdienst.registreren.RegistratieApp.em;
+import static nl.belastingdienst.registreren.Util.prompt;
 
 public class Inloggen implements Boundary {
     private static Inloggen self;
@@ -61,7 +57,8 @@ public class Inloggen implements Boundary {
 
         if (g != null && g.getWachtwoord().equals(wachtwoord) && g.getEmailadres().equals(eAdres)) {
             System.out.println("\nINLOGGEN GELUKT!");
-            System.out.println("\nWelkom op MP, koop/verkoopze!");
+            System.out.println("\nWelkom op MP!\n");
+
         } else {
             System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw.");
         }

@@ -2,6 +2,9 @@ package nl.belastingdienst.registreren;
 
 import java.util.*;
 
+import static nl.belastingdienst.registreren.Util.prompt;
+import static nl.belastingdienst.registreren.Util.prompt2;
+
 public class Registratie implements Boundary {
 
     private static Registratie self;
@@ -93,16 +96,4 @@ public class Registratie implements Boundary {
         System.out.println("\nUW WACHTWOORD IS: " + g.getWachtwoord());
     }
 
-
-    public static String prompt(String message) {
-        System.out.print(message);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    public static int prompt2(String message) {
-        System.out.print(message);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
 }
