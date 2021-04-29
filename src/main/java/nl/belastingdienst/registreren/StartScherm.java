@@ -26,6 +26,7 @@ public class StartScherm implements Boundary {
                         break;
                     case "2":
                         inloggenGebruiker().start();
+                        break;
                     case "x":
                         System.out.println("Tot ziens.");
                         return;

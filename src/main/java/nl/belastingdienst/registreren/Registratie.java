@@ -25,7 +25,7 @@ public class Registratie implements Boundary {
                     add();
                     break;
                 case "x":
-                    new StartScherm().start();
+                    return;
             }
         } catch (NoSuchElementException e) {
             System.out.println("Ongeldige keuze, probeer opnieuw.");
@@ -46,12 +46,12 @@ public class Registratie implements Boundary {
 
         while (true) {
             try {
-                int bezorgwijzeId = prompt2("Welke bezorgwijze(n) kiest u: " +
+                int bezorgwijzeId = prompt2("\nWelke bezorgwijze(n) kiest u: \n" +
                         "\n1 = Afhalen " +
                         "\n2 = Verzenden" +
                         "\n3 = Magazijn" +
                         "\n4 = Rembours" +
-                        "\n0 = Stoppen");
+                        "\n0 = Stoppen\n");
 
                 if (bezorgwijzeId == 0) {
                     break;
@@ -66,7 +66,7 @@ public class Registratie implements Boundary {
         }
 
         if (bezorgwijzeIds.contains(1)) {
-            System.out.println("U heeft in uw bezorgwijze(n) keuzes gekozen voor 'Afhalen', vul aub ook uw huisadres in.");
+            System.out.println("\nU heeft in uw bezorgwijze(n) keuzes gekozen voor 'Afhalen', vul aub ook uw huisadres in.");
             String adres = prompt("\nHuisadres: ");
             g.setAdres(adres);
         }
