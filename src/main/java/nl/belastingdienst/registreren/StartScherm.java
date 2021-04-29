@@ -2,29 +2,36 @@ package nl.belastingdienst.registreren;
 
 import java.util.Scanner;
 
+import static nl.belastingdienst.registreren.Inloggen.inloggenGebruiker;
 import static nl.belastingdienst.registreren.Registratie.registrerenGebruiker;
 
 public class StartScherm implements Boundary {
 
     public void start() {
-
+        while (true) {
             System.out.println("----------------------------------------------");
             System.out.println("Welkom bij het startscherm!");
             System.out.println("Wat wilt u doen?");
             System.out.println("----------------------------------------------");
 
             System.out.println("(1) [Registreren] ");
+            System.out.println("(2) [Inloggen] ");
             System.out.println("(x) [Afsluiten] ");
 
 
             try {
                 switch (readLine()) {
                     case "1":
-                        registrerenGebruiker().start(); break;
+                        registrerenGebruiker().start();
+                        break;
+                    case "2":
+                        inloggenGebruiker().start();
                     case "x":
-                        System.out.println("Tot ziens."); return;
+                        System.out.println("Tot ziens.");
+                        return;
                     default:
-                        System.out.println("Ongeldige keuze; probeer opnieuw."); break;
+                        System.out.println("Ongeldige keuze; probeer opnieuw.");
+                        break;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Dit is ongeldige invoer. Probeer het opnieuw.");
@@ -39,6 +46,7 @@ public class StartScherm implements Boundary {
                 System.out.println("Tot ziens.");
             }
         }
+    }
 
     private String readLine() {
         Scanner scanner = new Scanner(System.in);

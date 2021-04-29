@@ -10,13 +10,13 @@
         </Console>
 
         <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
-        <RollingFile name="rollingFile" append="false" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
+        <RollingFile name="rollingFile" append="false" fileName="logs/debug.log" filePattern="logs/debug-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout pattern="${logpattern}"/>
             <Policies>
                 <!-- Rolling once a day -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <!-- Rolling based on size -->
-                <SizeBasedTriggeringPolicy size="2 KB"/>
+                <SizeBasedTriggeringPolicy size="4000 KB"/>
             </Policies>
         </RollingFile>
     </Appenders>
@@ -31,7 +31,7 @@
         <Logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
 
         <Root level="DEBUG">
-            <AppenderRef ref="console"/>
+<!--            <AppenderRef ref="console"/>-->
             <AppenderRef ref="rollingFile"/>
         </Root>
     </Loggers>

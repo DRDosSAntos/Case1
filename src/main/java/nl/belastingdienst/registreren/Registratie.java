@@ -26,8 +26,6 @@ public class Registratie implements Boundary {
                     break;
                 case "x":
                     new StartScherm().start();
-//                default:
-//                    System.out.println("Ongeldige keuze, probeer opnieuw.");
             }
         } catch (NoSuchElementException e) {
             System.out.println("Ongeldige keuze, probeer opnieuw.");
@@ -91,7 +89,7 @@ public class Registratie implements Boundary {
         GebruikerDAO dao1 = new GebruikerDAO();
         dao1.persist(g);
 
-        System.out.println("\nGEBRUIKER GEREGISTREERD!!");
+        System.out.println("\nREGISTREREN GELUKT!");
         System.out.println("\nUW WACHTWOORD IS: " + g.getWachtwoord());
     }
 
