@@ -51,20 +51,19 @@ public class Inloggen implements Boundary {
         String eAdres = prompt("e-Mailadres: ");
         String wachtwoord = prompt("Wachtwoord: ");
 
+        Gebruiker g = null;
         try {
-            Gebruiker g = em.createQuery("SELECT e FROM Gebruiker e WHERE e.emailadres = :eAdres ", Gebruiker.class)
+            g = em.createQuery("SELECT e FROM Gebruiker e WHERE e.emailadres = :eAdres ", Gebruiker.class)
                     .setParameter("eAdres", eAdres).getSingleResult();
-
-            if (g.getWachtwoord().equals(wachtwoord) && g.getEmailadres().equals(eAdres)) {
-                System.out.println("\nINLOGGEN GELUKT!");
-                System.out.println("\nWelkom op MP, koop/verkoopze!");
-            } else {
-                System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw.");
-//                search();
-            }
         } catch (NoResultException e) {
             System.out.println("Gebruiker niet gevonden, probeer opnieuw");
-//            search();
+        }
+
+        if (g != null && g.getWachtwoord().equals(wachtwoord) && g.getEmailadres().equals(eAdres)) {
+            System.out.println("\nINLOGGEN GELUKT!");
+            System.out.println("\nWelkom op MP, koop/verkoopze!");
+        } else {
+            System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw.");
         }
     }
 }
