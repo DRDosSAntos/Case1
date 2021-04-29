@@ -2,7 +2,6 @@ package nl.belastingdienst.registreren;
 
 import javax.persistence.NoResultException;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import static nl.belastingdienst.registreren.RegistratieApp.em;
 import static nl.belastingdienst.registreren.Util.prompt;
@@ -18,18 +17,16 @@ public class Inloggen implements Boundary {
         return self;
     }
 
-    private String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+    Gebruiker g = new Gebruiker();
 
     public void start() {
+
         while (true) {
             try {
                 System.out.println("(1) [Logingegevens invullen]");
                 System.out.println("(x) [Terug]");
 
-                switch (readLine()) {
+                switch (new Util().readLine()) {
                     case "1":
                         search();
                         break;
@@ -37,9 +34,10 @@ public class Inloggen implements Boundary {
                         return;
                 }
             } catch (NoSuchElementException e) {
-                System.out.println("Ongeldige keuze, probeer opnieuw.");
+                System.out.println("Ongeldige keuze, probeer opnieuw");
             }
         }
+
     }
 
     private void search() {
@@ -47,7 +45,6 @@ public class Inloggen implements Boundary {
         String eAdres = prompt("e-Mailadres: ");
         String wachtwoord = prompt("Wachtwoord: ");
 
-        Gebruiker g = null;
         try {
             g = em.createQuery("SELECT e FROM Gebruiker e WHERE e.emailadres = :eAdres ", Gebruiker.class)
                     .setParameter("eAdres", eAdres).getSingleResult();
@@ -59,10 +56,22 @@ public class Inloggen implements Boundary {
             System.out.println("\nINLOGGEN GELUKT!");
             System.out.println("\nWelkom op MP!\n");
 
-        } else {
-            System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw.");
+            System.out.println("(1) [Product zoeken]");
+            System.out.println("(x) [Uitloggen]");
+
+            switch (new Util().readLine()) {
+                case "1":
+                    System.out.println("\n--EINDE DEMO--\n");
+                    break;
+                case "x":
+                    System.out.println("\nU bent uitgelogd\n");
+                    new StartScherm().start();
+            }
+
+            } else{
+                System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw");
+            }
         }
     }
-}
 
 
