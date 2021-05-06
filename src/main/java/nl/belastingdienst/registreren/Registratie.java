@@ -2,8 +2,8 @@ package nl.belastingdienst.registreren;
 
 import java.util.*;
 
-import static nl.belastingdienst.registreren.Util.prompt;
-import static nl.belastingdienst.registreren.Util.prompt2;
+import static nl.belastingdienst.registreren.Util.promptString;
+import static nl.belastingdienst.registreren.Util.promptInt;
 
 public class Registratie implements Boundary {
 
@@ -43,13 +43,13 @@ public class Registratie implements Boundary {
     private void add() {
         Gebruiker g = new Gebruiker();
 
-        String naam = prompt("Naam: ");
-        String emailAdres = prompt("e-Mailadres: ");
+        String naam = promptString("Naam: ");
+        String emailAdres = promptString("e-Mailadres: ");
         Set<Integer> bezorgwijzeIds = new HashSet<>();
 
         while (true) {
             try {
-                int bezorgwijzeId = prompt2("\nWelke bezorgwijze(n) kiest u: \n" +
+                int bezorgwijzeId = promptInt("\nWelke bezorgwijze(n) kiest u: \n" +
                         "\n1 = Afhalen " +
                         "\n2 = Verzenden" +
                         "\n3 = Magazijn" +
@@ -70,7 +70,7 @@ public class Registratie implements Boundary {
 
         if (bezorgwijzeIds.contains(1)) {
             System.out.println("\nU heeft in uw bezorgwijze(n) keuzes gekozen voor 'Afhalen', vul aub ook uw huisadres in.");
-            String adres = prompt("\nHuisadres: ");
+            String adres = promptString("\nHuisadres: ");
             g.setAdres(adres);
         }
 

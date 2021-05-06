@@ -7,12 +7,12 @@ public class Util {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    public static String prompt(String message) {
+    public static String promptString(String message) {
         System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    public static int prompt2(String message) {
+    public static int promptInt(String message) {
         System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();

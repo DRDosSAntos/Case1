@@ -4,7 +4,7 @@ import javax.persistence.NoResultException;
 import java.util.NoSuchElementException;
 
 import static nl.belastingdienst.registreren.RegistratieApp.em;
-import static nl.belastingdienst.registreren.Util.prompt;
+import static nl.belastingdienst.registreren.Util.promptString;
 
 public class Inloggen implements Boundary {
     private static Inloggen self;
@@ -42,28 +42,24 @@ public class Inloggen implements Boundary {
 
     private void search() {
 
-        String eAdres = prompt("e-Mailadres: ");
-        String wachtwoord = prompt("Wachtwoord: ");
+        String eAdres = promptString("e-Mailadres: ");
+        String wachtwoord = promptString("Wachtwoord: ");
 
         try {
-            g = em.createQuery("SELECT e FROM Gebruiker e WHERE e.emailadres = :eAdres ", Gebruiker.class)
-                    .setParameter("eAdres", eAdres).getSingleResult();
+            g = em.createQuery("SELECT e FROM Gebruiker e WHERE e.emailadres = :eAdres AND e.wachtwoord = :wachtwoord", Gebruiker.class)
+                    .setParameter("eAdres", eAdres)
+                    .setParameter("wachtwoord", wachtwoord)
+                    .getSingleResult();
+
+            System.out.println("\n[INLOGGEN GELUKT]");
+            System.out.println("\nWelkom op MP!\n");
+
+            ingelogd();
         } catch (NoResultException e) {
-            System.out.println("Gebruiker niet gevonden, probeer opnieuw");
-        }
-
-        try {
-            if (g != null && g.getWachtwoord().equals(wachtwoord) && g.getEmailadres().equals(eAdres)) {
-                System.out.println("\n[INLOGGEN GELUKT]");
-                System.out.println("\nWelkom op MP!\n");
-
-                ingelogd();
-
-            } else {
-                System.out.println("Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw");
-            }
-        } catch (NullPointerException e) {
-            new StartScherm().start();
+            System.out.println("\n Combinatie e-Mailadres + wachtwoord is NIET correct, probeer opnieuw\n");
+        } catch (Exception e) {
+            // logging
+            System.out.println("\nEr is iets misgegaan\n");
         }
     }
 
@@ -84,10 +80,11 @@ public class Inloggen implements Boundary {
                         break;
                     case "x":
                         System.out.println("\n[U BENT UITGELOGD]\n");
-                        new StartScherm().start();
-                        break;
+//                        new StartScherm().start();
+//                        break;
+                        return;
                 }
-                }catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 System.out.println("Ongeldige keuze, probeer opnieuw");
             }
         }
