@@ -5,6 +5,8 @@ import javax.persistence.Persistence;
 
 public class RegistratieApp {
 
+    //verliest felxibiliteit met onderstaande static optie
+
     public static final EntityManager em =
             Persistence.createEntityManagerFactory("MySQL-case1").createEntityManager();
 

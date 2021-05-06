@@ -80,7 +80,7 @@ public class Registratie implements Boundary {
     private void registratieGegevensSetten(Gebruiker g, String naam, String emailAdres, Set<Integer> bezorgwijzeIds) {
         g.setNaam(naam);
         g.setEmailadres(emailAdres);
-        g.setWachtwoord("Welkom123");
+        g.setWachtwoord(new WachtwoordGenerator().maakEenRandomWachtwoord());
 
 
         for (Integer bezorgwijzeId : bezorgwijzeIds) {

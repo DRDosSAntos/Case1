@@ -1,11 +1,11 @@
 package nl.belastingdienst.registreren;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
 import static nl.belastingdienst.registreren.RegistratieApp.em;
 
 public class GebruikerDAO {
+
+    //Hier query's verzamelen, hier creeren als methode en bij de inlogscherm bijv. aanroepen,
+    // handig om bij tests te injecteren
 
     public void persist(Gebruiker g) {
         em.getTransaction().begin();
