@@ -20,8 +20,8 @@ public class Registratie implements Boundary {
     public void start() {
 
         try {
-            System.out.println("(1) [Registratiegegevens invullen]");
-            System.out.println("(x) [Terug]");
+            System.out.println("(1) \uD83D\uDC64 [Registratiegegevens invullen]");
+            System.out.println("(x) \uD83D\uDD19 [Terug]");
 
             switch (readLine()) {
                 case "1":

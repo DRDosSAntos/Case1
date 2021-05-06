@@ -23,8 +23,8 @@ public class Inloggen implements Boundary {
 
         while (true) {
             try {
-                System.out.println("(1) [Logingegevens invullen]");
-                System.out.println("(x) [Terug]");
+                System.out.println("(1) \uD83D\uDCE7 [Logingegevens invullen]");
+                System.out.println("(x) \uD83D\uDD19 [Terug]");
 
                 switch (new Util().readLine()) {
                     case "1":

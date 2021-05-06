@@ -14,9 +14,9 @@ public class StartScherm implements Boundary {
             System.out.println("Wat wilt u doen?");
             System.out.println("----------------------------------------------");
 
-            System.out.println("(1) [Registreren] ");
-            System.out.println("(2) [Inloggen] ");
-            System.out.println("(x) [Afsluiten] ");
+            System.out.println("(1) \uD83D\uDC64 [Registreren] ");
+            System.out.println("(2) \uD83D\uDCE7 [Inloggen] ");
+            System.out.println("(x) \uD83D\uDD1A [Afsluiten] ");
 
             try {
                 switch (new Util().readLine()) {
