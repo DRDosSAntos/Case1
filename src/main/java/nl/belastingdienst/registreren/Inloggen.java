@@ -66,24 +66,30 @@ public class Inloggen implements Boundary {
             new StartScherm().start();
         }
     }
-//loop eromheen met conditie, bij x stopt de loop anders komt hij (while loop)
-    public void ingelogd() {
-        System.out.println("(1) [Product zoeken]");
-        System.out.println("(2) [Product aanbieden]");
-        System.out.println("(x) [Uitloggen]");
 
-        switch (new Util().readLine()) {
-            case "1":
-                System.out.println("\n[ZOEKFUNCTIONALITEIT IS NOG NIET BESCHIKBAAR]\n\n--EINDE DEMO--\n");
-                ingelogd();
-                break;
-            case "2":
-                System.out.println("\n[DEZE FUNCTIONALITEIT IS NOG NIET BESCHIKBAAR]\n\n--EINDE DEMO--\n");
-                ingelogd();
-                break;
-            case "x":
-                System.out.println("\n[U BENT UITGELOGD]\n");
-                new StartScherm().start();
+    //loop eromheen met conditie, bij x stopt de loop anders komt hij (while loop)
+    public void ingelogd() {
+        while (true) {
+            try {
+                System.out.println("(1) [Product zoeken]");
+                System.out.println("(2) [Product aanbieden]");
+                System.out.println("(x) [Uitloggen]");
+
+                switch (new Util().readLine()) {
+                    case "1":
+                        System.out.println("\n[ZOEKFUNCTIONALITEIT IS NOG NIET BESCHIKBAAR]\n\n--EINDE DEMO--\n");
+                        break;
+                    case "2":
+                        System.out.println("\n[DEZE FUNCTIONALITEIT IS NOG NIET BESCHIKBAAR]\n\n--EINDE DEMO--\n");
+                        break;
+                    case "x":
+                        System.out.println("\n[U BENT UITGELOGD]\n");
+                        new StartScherm().start();
+                        break;
+                }
+                }catch(NoSuchElementException e){
+                System.out.println("Ongeldige keuze, probeer opnieuw");
+            }
         }
     }
 }
